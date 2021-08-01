@@ -64,6 +64,12 @@ class Message(WhatsappObject):
         elif self.type == "revoked":
             self.content = ""
             self.safe_content = "..."
+        elif self.type == "document":
+            self.content = js_obj["content"]
+            self.safe_content = js_obj['caption']
+        else:
+            self.content = js_obj["content"]
+            self.safe_content = f"<{self.type}>"
 
     def __repr__(self):
         return "<Message - {type} from {sender} at {timestamp}: {content}>".format(
